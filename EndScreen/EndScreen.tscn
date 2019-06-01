@@ -1,0 +1,151 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://EndScreen/EndScreen.gd" type="Script" id=1]
+[ext_resource path="res://EndScreen/thunder1.png" type="Texture" id=2]
+[ext_resource path="res://EndScreen/thunder3.png" type="Texture" id=3]
+[ext_resource path="res://EndScreen/thunder.png" type="Texture" id=4]
+[ext_resource path="res://EndScreen/endBackGround.png" type="Texture" id=5]
+[ext_resource path="res://EndScreen/doge.png" type="Texture" id=6]
+[ext_resource path="res://fightingPit/You win.png" type="Texture" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "LightningAnimation"
+length = 0.7
+loop = true
+step = 0.03
+tracks/0/type = "value"
+tracks/0/path = NodePath("LightningBolt:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ null, ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LightningBolt:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.09, 0.12, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1.3 ), Vector2( 1, 2 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Win"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -810, 2700 ), Vector2( -810, -2700 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Lose"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 810, -2700 ), Vector2( 810, 2700 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Lightning"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -1800 ), Vector2( 0, 1800 ) ]
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/LightningAnimation = SubResource( 1 )
+
+[node name="backGround" type="Sprite" parent="."]
+modulate = Color( 0.180392, 0.854902, 0.807843, 1 )
+position = Vector2( -810, -320.455 )
+z_index = -1
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1600, 7200 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="backGround"]
+autoplay = "Win"
+anims/Win = SubResource( 2 )
+
+[node name="backGround2" type="Sprite" parent="."]
+modulate = Color( 1, 0.0509804, 0.0509804, 1 )
+position = Vector2( 810, -2700 )
+scale = Vector2( 1.12213, 1.04161 )
+z_index = -2
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1600, 7200 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="backGround2"]
+autoplay = "Lose"
+anims/Lose = SubResource( 3 )
+
+[node name="doge" type="Sprite" parent="."]
+position = Vector2( -230, 120 )
+scale = Vector2( 2.2, 2.2 )
+texture = ExtResource( 6 )
+offset = Vector2( 513.293, 51.0487 )
+
+[node name="doge2" type="Sprite" parent="."]
+position = Vector2( -2200, 40 )
+scale = Vector2( 2.2, 2.2 )
+texture = ExtResource( 6 )
+offset = Vector2( 513.293, 51.0487 )
+flip_h = true
+
+[node name="YouWin" type="Sprite" parent="."]
+position = Vector2( -40, -510 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+
+[node name="LightningBolt" type="Sprite" parent="."]
+position = Vector2( 0, -1800 )
+z_index = -1
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3200, 7200 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LightningBolt"]
+anims/Lightning = SubResource( 4 )

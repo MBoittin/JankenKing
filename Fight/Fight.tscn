@@ -1,8 +1,29 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Fight/Fight.gd" type="Script" id=1]
 [ext_resource path="res://Fight/PlayerHand.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Fight/Hand.tscn" type="PackedScene" id=3]
+[ext_resource path="res://fightingPit/Ciseaux.jpg" type="Texture" id=4]
+[ext_resource path="res://fightingPit/Pierre.jpg" type="Texture" id=5]
+[ext_resource path="res://fightingPit/Papier.jpg" type="Texture" id=6]
+[ext_resource path="res://Fight/fightBackGround.png" type="Texture" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "BackGround"
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -4800, 0 ), Vector2( 4800, 0 ) ]
+}
 
 [node name="Fight" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,5 +36,36 @@ position = Vector2( 786.641, 5.5791 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
+
+[node name="Ciseaux" type="Sprite" parent="."]
+position = Vector2( -248.947, 2.5769 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+
+[node name="Pierre" type="Sprite" parent="."]
+position = Vector2( -1510.03, 2.5769 )
+texture = ExtResource( 5 )
+
+[node name="Papier" type="Sprite" parent="."]
+position = Vector2( -847.706, -501.858 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 6 )
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( -4287.82, 0 )
+
+[node name="Sprite" type="Sprite" parent="Node2D"]
+position = Vector2( 0, -3.79468 )
+z_index = -1
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 12800, 1800 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D"]
+autoplay = "BackGround"
+anims/BackGround = SubResource( 1 )
+
+[node name="Camera2D2" type="Camera2D" parent="."]
+current = true
 [connection signal="player_turn_end" from="PlayerHand" to="." method="_on_PlayerHand_player_turn_end"]
 [connection signal="animation_finished" from="Hand" to="." method="_on_Hand_animation_finished"]

@@ -1,14 +1,26 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://fightingPit/fightingPit.gd" type="Script" id=1]
-[ext_resource path="res://fightingPit/Stage.png" type="Texture" id=2]
-[ext_resource path="res://Fight/Fight.tscn" type="PackedScene" id=3]
-[ext_resource path="res://fightingPit/Ennemy.gd" type="Script" id=4]
-[ext_resource path="res://fightingPit/Ciseaux.jpg" type="Texture" id=5]
+[ext_resource path="res://Fight/Fight.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fightingPit/Ennemy.gd" type="Script" id=3]
+[ext_resource path="res://fightingPit/Ciseaux.jpg" type="Texture" id=4]
+[ext_resource path="res://fightingPit/background.png" type="Texture" id=5]
+[ext_resource path="res://fightingPit/Platform.png" type="Texture" id=6]
+[ext_resource path="res://fightingPit/stand.png" type="Texture" id=7]
+[ext_resource path="res://fightingPit/Presenter.png" type="Texture" id=8]
+[ext_resource path="res://fightingPit/EnemyAnimation.tres" type="Animation" id=9]
+[ext_resource path="res://fightingPit/Sprites.tres" type="Animation" id=10]
+[ext_resource path="res://fightingPit/YouWin.tres" type="Animation" id=11]
+[ext_resource path="res://fightingPit/crowd.png" type="Texture" id=12]
+[ext_resource path="res://fightingPit/You win.png" type="Texture" id=13]
+[ext_resource path="res://fightingPit/hiroto.png" type="Texture" id=14]
+[ext_resource path="res://fightingPit/player.png" type="Texture" id=15]
+[ext_resource path="res://EndScreen/EndScreen.tscn" type="PackedScene" id=16]
+[ext_resource path="res://fightingPit/HP.png" type="Texture" id=17]
+[ext_resource path="res://fightingPit/HPFliped.png" type="Texture" id=18]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Hints"
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:visible")
 tracks/0/interp = 1
@@ -22,27 +34,172 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
+[sub_resource type="Animation" id=3]
+resource_name = "crowdAnimation"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 2.4, 4 ),
+"transitions": PoolRealArray( 1, 1, 0.217638, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1.05 ), Vector2( 1, 1.08 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Player"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.98, 1.03 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -590, 20 ), Vector2( -590, 10 ), Vector2( -590, 20 ) ]
+}
+
 [node name="FightingPit" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 2.3916, 0 )
-texture = ExtResource( 2 )
-
-[node name="Fight" parent="." instance=ExtResource( 3 )]
+[node name="Fight" parent="." instance=ExtResource( 2 )]
 visible = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
 [node name="Ennemy" type="Node2D" parent="."]
-script = ExtResource( 4 )
+script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="Ennemy"]
 visible = false
 position = Vector2( 1058.48, -383.731 )
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Ennemy"]
 anims/Hints = SubResource( 1 )
-[connection signal="hint_finished" from="Ennemy" to="." method="_on_Ennemy_hint_finished"]
+
+[node name="Sprites" type="Node2D" parent="."]
+z_index = -1
+
+[node name="Background" type="Sprite" parent="Sprites"]
+position = Vector2( 2, 0 )
+texture = ExtResource( 5 )
+
+[node name="Platform" type="Sprite" parent="Sprites"]
+position = Vector2( 2, 0 )
+texture = ExtResource( 6 )
+
+[node name="Stand" type="Sprite" parent="Sprites"]
+position = Vector2( 9, 116 )
+texture = ExtResource( 7 )
+
+[node name="Presenter" type="Sprite" parent="Sprites"]
+position = Vector2( 20, -240 )
+texture = ExtResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Presenter"]
+autoplay = "PresenterIdle"
+anims/IdleEnemy = ExtResource( 9 )
+anims/PresenterIdle = ExtResource( 10 )
+"anims/You Win" = ExtResource( 11 )
+
+[node name="Crowd" type="Sprite" parent="Sprites"]
+position = Vector2( 0, 490 )
+texture = ExtResource( 12 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Crowd"]
+autoplay = "crowdAnimation"
+anims/crowdAnimation = SubResource( 3 )
+
+[node name="YouWin" type="Sprite" parent="Sprites"]
+visible = false
+position = Vector2( -530, -600 )
+texture = ExtResource( 13 )
+
+[node name="Enemy" type="Sprite" parent="Sprites"]
+position = Vector2( 710, 20 )
+scale = Vector2( 0.975, 1.025 )
+texture = ExtResource( 14 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Enemy"]
+autoplay = "EnemyAnimation"
+anims/EnemyAnimation = ExtResource( 9 )
+anims/Sprites = ExtResource( 10 )
+
+[node name="Player" type="Sprite" parent="Sprites"]
+position = Vector2( -590, 20 )
+texture = ExtResource( 15 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Player"]
+autoplay = "Player"
+anims/Player = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites"]
+anims/YouWin = ExtResource( 11 )
+
+[node name="EndScreen" parent="." instance=ExtResource( 16 )]
+visible = false
+z_index = 3
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+margin_left = -1530.0
+margin_top = -830.0
+margin_right = -1072.0
+margin_bottom = -688.0
+rect_scale = Vector2( 1.13811, 1.15704 )
+
+[node name="TextureRect3" type="TextureRect" parent="Control/HBoxContainer"]
+margin_right = 227.0
+margin_bottom = 142.0
+texture = ExtResource( 17 )
+
+[node name="TextureRect2" type="TextureRect" parent="Control/HBoxContainer"]
+margin_left = 231.0
+margin_right = 458.0
+margin_bottom = 142.0
+texture = ExtResource( 17 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control"]
+margin_left = 1000.0
+margin_top = -830.0
+margin_right = 1458.0
+margin_bottom = -688.0
+rect_scale = Vector2( 1.13811, 1.15704 )
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer2"]
+margin_right = 227.0
+margin_bottom = 142.0
+texture = ExtResource( 18 )
+
+[node name="TextureRect2" type="TextureRect" parent="Control/HBoxContainer2"]
+margin_left = 231.0
+margin_right = 458.0
+margin_bottom = 142.0
+texture = ExtResource( 18 )

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Fight/Hand.gd" type="Script" id=1]
-[ext_resource path="res://Fight/Rock.png" type="Texture" id=2]
+[ext_resource path="res://Fight/Scissors.png" type="Texture" id=2]
 [ext_resource path="res://Fight/HandAnimation.tres" type="Animation" id=3]
-[ext_resource path="res://Fight/LastHandAnimation.tres" type="Animation" id=4]
+[ext_resource path="res://Fight/HandAnimationEnemy.tres" type="Animation" id=4]
+[ext_resource path="res://Fight/LastHandAnimation.tres" type="Animation" id=5]
 
 [node name="Hand" type="Node2D"]
 script = ExtResource( 1 )
@@ -13,4 +14,5 @@ texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/HandAnimation = ExtResource( 3 )
-anims/LastHandAnimation = ExtResource( 4 )
+anims/HandAnimationEnemy = ExtResource( 4 )
+anims/LastHandAnimation = ExtResource( 5 )

@@ -12,8 +12,11 @@ var turnCount = 0
 var moves = [0, 0, 0]
 var victoryCount = 0
 
+signal game_end
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Hand/Sprite.flip_h = true
 	pass # Replace with function body.
 
 func startGame(newMoves):
@@ -43,6 +46,7 @@ func endGame():
 		print ("You Loose")
 	else:
 		print ("The cake is a Tie")
+	emit_signal("game_end", victoryCount)
 
 func endTurn():
 	var winState = Global.getWinner(playerSymbol, symbol)

@@ -13,6 +13,7 @@ func _ready():
 	pass # Replace with function body.
 
 func startTurn():
+	$Hand.setPlayerHand()
 	$Hand.startTurn()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
