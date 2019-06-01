@@ -67,6 +67,21 @@ func _on_Hand_animation_finished():
 
 func _on_PlayerHand_player_turn_end(selectedAction):
 	print ("test")
-	playerSymbol = selectedAction
 	endOfPlayerTurn = true
+	pass # Replace with function body.
+
+
+func _on_PlayerHand_selected_symbol(selectedSymbol):
+	if !endOfEnnemyTurn:
+		playerSymbol = selectedSymbol
+	$Ciseaux/AnimationPlayer2.stop()
+	$Pierre/AnimationPlayer2.stop()
+	$Papier/AnimationPlayer2.stop()
+
+	if selectedSymbol == Global.Symbols.rock:
+		$Pierre/AnimationPlayer2.play("Selected")
+	if selectedSymbol == Global.Symbols.scissors:
+		$Ciseaux/AnimationPlayer2.play("Selected")
+	if selectedSymbol == Global.Symbols.paper:
+		$Papier/AnimationPlayer2.play("Selected")
 	pass # Replace with function body.

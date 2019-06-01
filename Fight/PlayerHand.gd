@@ -4,6 +4,7 @@ extends Node2D
 # var a = 2
 # var b = "text"
 signal player_turn_end
+signal selected_symbol
 
 
 var selectedAction = Global.Symbols.scissors
@@ -20,10 +21,13 @@ func startTurn():
 func _process(delta):
 	if Input.is_action_pressed("ui_right"):
 		selectedAction = Global.Symbols.scissors
+		emit_signal("selected_symbol", selectedAction)
 	if Input.is_action_pressed("ui_left"):
 		selectedAction = Global.Symbols.rock
+		emit_signal("selected_symbol", selectedAction)
 	if Input.is_action_pressed("ui_up"):
 		selectedAction = Global.Symbols.paper
+		emit_signal("selected_symbol", selectedAction)
 	pass
 
 

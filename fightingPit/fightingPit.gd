@@ -11,6 +11,9 @@ var enemyLife = 2
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	#$Bubble.visible = true
+	#$Bubble.appendText("I'm the ", "#ffffff")
+	#$Bubble.appendText("Referee!", "#C70000")
 	pass # Replace with function body.
 
 func resolveGame(victoryCount):
