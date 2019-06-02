@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://fightingPit/fightingPit.gd" type="Script" id=1]
 [ext_resource path="res://Fight/Fight.tscn" type="PackedScene" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://fightingPit/Bubble.tscn" type="PackedScene" id=20]
 [ext_resource path="res://fightingPit/menu-bg.jpg" type="Texture" id=21]
 [ext_resource path="res://fightingPit/play-button.png" type="Texture" id=22]
+[ext_resource path="res://bgm/prelude-and-action-by-kevin-macleod.ogg" type="AudioStream" id=23]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Hints"
@@ -364,3 +365,7 @@ texture = ExtResource( 22 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MenuScreen/Sprite2"]
 autoplay = "Idle"
 anims/Idle = SubResource( 8 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 23 )
+autoplay = true

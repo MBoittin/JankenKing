@@ -31,6 +31,7 @@ func sendEndTurn():
 		emit_signal("animation_finished")
 
 func startTurn():
+	$Sprite.texture = Global.rock
 	iterator = 0
 	$Sprite.scale.x = 1
 	$Sprite.scale.y = 1

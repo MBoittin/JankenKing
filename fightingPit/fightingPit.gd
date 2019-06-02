@@ -163,10 +163,8 @@ func resolveGame(victoryCount):
 			$Sprites/Presenter/Winning.play("EnemyWin")	
 		else:
 			$Sprites/Presenter/Winning.play("win")
-		
-		
 		yield($Sprites/Crowd/Sprite/AnimationPlayer, "animation_finished")
-		
+
 		$Sprites/Presenter/Winning.stop()
 		$Sprites/Presenter/AnimationPlayer.play("PresenterIdle")
 		$Sprites/Presenter.flip_h = false
