@@ -64,7 +64,8 @@ func endTurn():
 		yield($PlayerHand/Hand/AnimationPlayer, "animation_finished")
 		$PlayerHand/Hand/AnimationPlayer.play("Destruction")
 		yield($PlayerHand/Hand/AnimationPlayer, "animation_finished")
-	$ResetSymbols.play("ResetSymbols")
+	if turnCount != 3:
+		$ResetSymbols.play("ResetSymbols")
 	yield(get_tree().create_timer(1), "timeout")
 	startNextTurn = true
 

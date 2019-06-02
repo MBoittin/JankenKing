@@ -1,4 +1,6 @@
-[gd_resource type="Animation" format=2]
+[gd_resource type="Animation" load_steps=2 format=2]
+
+[ext_resource path="res://fightingPit/Presenter.png" type="Texture" id=1]
 
 [resource]
 resource_name = "IdleEnemy"
@@ -26,5 +28,17 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1.2, 2.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 710, 20 ), Vector2( 710, 40 ), Vector2( 710, 20 ) ]
+"values": [ Vector2( 650, -30 ), Vector2( 650, -10 ), Vector2( 650, -30 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 21.1121 ),
+"update": 1,
+"values": [ ExtResource( 1 ) ]
 }

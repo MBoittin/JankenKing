@@ -25,7 +25,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 0.95, 0.95 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=2]
 resource_name = "Selection"
 length = 0.6
 tracks/0/type = "value"
@@ -41,7 +41,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=3]
 resource_name = "Hide"
 length = 0.7
 tracks/0/type = "value"
@@ -89,7 +89,7 @@ tracks/3/keys = {
 "values": [ 0.0, 13.0, 24.0, 40.0 ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=4]
 length = 2.3
 loop = true
 tracks/0/type = "value"
@@ -105,8 +105,7 @@ tracks/0/keys = {
 "values": [ Vector2( -469.754, 671.498 ), Vector2( -469.754, 651.498 ), Vector2( -469.754, 671.498 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Selected"
+[sub_resource type="Animation" id=5]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:scale")
@@ -121,7 +120,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=6]
 resource_name = "Selection"
 length = 0.6
 tracks/0/type = "value"
@@ -137,7 +136,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=7]
 resource_name = "Hide"
 length = 0.7
 tracks/0/type = "value"
@@ -185,7 +184,7 @@ tracks/3/keys = {
 "values": [ 0.0, -13.0, -24.0, -40.0 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=8]
 length = 1.8
 loop = true
 tracks/0/type = "value"
@@ -201,8 +200,7 @@ tracks/0/keys = {
 "values": [ Vector2( -2.641, 365 ), Vector2( -2.641, 344.958 ), Vector2( -2.64081, 364.958 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "Selected"
+[sub_resource type="Animation" id=9]
 length = 1.1
 loop = true
 tracks/0/type = "value"
@@ -218,8 +216,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 0.93, 0.93 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=9]
-resource_name = "Selection"
+[sub_resource type="Animation" id=10]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:scale")
@@ -234,7 +231,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=11]
 resource_name = "Hide"
 length = 0.75
 step = 0.05
@@ -283,7 +280,7 @@ tracks/3/keys = {
 "values": [ 0.0, 13.0, 24.0, 80.0 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=12]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -435,10 +432,10 @@ anims/Idle = ExtResource( 5 )
 anims/Selected = SubResource( 1 )
 
 [node name="Selection" type="AnimationPlayer" parent="Ciseaux"]
-anims/Selection = SubResource( 7 )
+anims/Selection = SubResource( 2 )
 
 [node name="Hide" type="AnimationPlayer" parent="Ciseaux"]
-anims/Hide = SubResource( 10 )
+anims/Hide = SubResource( 3 )
 
 [node name="Pierre" type="Sprite" parent="."]
 position = Vector2( -468, 680.87 )
@@ -446,16 +443,16 @@ texture = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Pierre"]
 autoplay = "Idle"
-anims/Idle = SubResource( 2 )
+anims/Idle = SubResource( 4 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Pierre"]
-anims/Selected = SubResource( 3 )
+anims/Selected = SubResource( 5 )
 
 [node name="Selection" type="AnimationPlayer" parent="Pierre"]
-anims/Selection = SubResource( 8 )
+anims/Selection = SubResource( 6 )
 
 [node name="Hide" type="AnimationPlayer" parent="Pierre"]
-anims/Hide = SubResource( 11 )
+anims/Hide = SubResource( 7 )
 
 [node name="Papier" type="Sprite" parent="."]
 position = Vector2( -2.64081, 365 )
@@ -463,16 +460,16 @@ texture = ExtResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Papier"]
 autoplay = "Idle"
-anims/Idle = SubResource( 4 )
+anims/Idle = SubResource( 8 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Papier"]
-anims/Selected = SubResource( 5 )
+anims/Selected = SubResource( 9 )
 
 [node name="Selection" type="AnimationPlayer" parent="Papier"]
-anims/Selection = SubResource( 9 )
+anims/Selection = SubResource( 10 )
 
 [node name="Hide" type="AnimationPlayer" parent="Papier"]
-anims/Hide = SubResource( 12 )
+anims/Hide = SubResource( 11 )
 
 [node name="Background" type="Node2D" parent="."]
 position = Vector2( -4287.82, 0 )
@@ -487,7 +484,7 @@ region_rect = Rect2( 0, 0, 12800, 1800 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
 autoplay = "BackGround"
-anims/BackGround = SubResource( 6 )
+anims/BackGround = SubResource( 12 )
 
 [node name="Camera2D2" type="Camera2D" parent="."]
 current = true

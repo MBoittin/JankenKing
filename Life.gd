@@ -12,6 +12,9 @@ func _ready():
 func setFlip():
 	texture = Global.flippedLife
 
+func destroy():
+	$Destroy.play("Destroy")
+
 func create():
 	$Create.play("Create")
 # Called every frame. 'delta' is the elapsed time since the previous frame.

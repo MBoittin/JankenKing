@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://fightingPit/fightingPit.gd" type="Script" id=1]
 [ext_resource path="res://Fight/Fight.tscn" type="PackedScene" id=2]
@@ -11,15 +11,14 @@
 [ext_resource path="res://fightingPit/EnemyAnimation.tres" type="Animation" id=9]
 [ext_resource path="res://fightingPit/Sprites.tres" type="Animation" id=10]
 [ext_resource path="res://fightingPit/YouWin.tres" type="Animation" id=11]
-[ext_resource path="res://fightingPit/crowd.png" type="Texture" id=12]
-[ext_resource path="res://fightingPit/You win.png" type="Texture" id=13]
-[ext_resource path="res://fightingPit/hiroto.png" type="Texture" id=14]
-[ext_resource path="res://fightingPit/player.png" type="Texture" id=15]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=16]
-[ext_resource path="res://EndScreen/EndScreen.tscn" type="PackedScene" id=17]
-[ext_resource path="res://fightingPit/Bubble.png" type="Texture" id=18]
-[ext_resource path="res://fightingPit/Bubble.gd" type="Script" id=19]
-[ext_resource path="res://fightingPit/BADABB__.TTF" type="DynamicFontData" id=20]
+[ext_resource path="res://fightingPit/presenter_go.png" type="Texture" id=12]
+[ext_resource path="res://fightingPit/crowd.png" type="Texture" id=13]
+[ext_resource path="res://fightingPit/You win.png" type="Texture" id=14]
+[ext_resource path="res://fightingPit/hiroto.png" type="Texture" id=15]
+[ext_resource path="res://fightingPit/player.png" type="Texture" id=16]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=17]
+[ext_resource path="res://EndScreen/EndScreen.tscn" type="PackedScene" id=18]
+[ext_resource path="res://fightingPit/Bubble.tscn" type="PackedScene" id=19]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Hints"
@@ -34,6 +33,33 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 81.572 ),
 "update": 1,
 "values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "JANKENGO"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 12 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 3.29303, -420 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -81,12 +107,6 @@ tracks/1/keys = {
 "values": [ Vector2( -590, 20 ), Vector2( -590, 10 ), Vector2( -590, 20 ) ]
 }
 
-[sub_resource type="DynamicFont" id=4]
-size = 120
-outline_size = 11
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 20 )
-
 [node name="FightingPit" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -123,7 +143,7 @@ position = Vector2( 9, 116 )
 texture = ExtResource( 7 )
 
 [node name="Presenter" type="Sprite" parent="Sprites"]
-position = Vector2( 20, -240 )
+position = Vector2( 10, -240 )
 texture = ExtResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Presenter"]
@@ -132,9 +152,13 @@ anims/IdleEnemy = ExtResource( 9 )
 anims/PresenterIdle = ExtResource( 10 )
 "anims/You Win" = ExtResource( 11 )
 
+[node name="JANKENGO" type="AnimationPlayer" parent="Sprites/Presenter"]
+anims/JANKENGO = SubResource( 4 )
+
 [node name="Crowd" type="Sprite" parent="Sprites"]
 position = Vector2( 0, 490 )
-texture = ExtResource( 12 )
+scale = Vector2( 1, 1.08 )
+texture = ExtResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Crowd"]
 autoplay = "crowdAnimation"
@@ -143,12 +167,12 @@ anims/crowdAnimation = SubResource( 2 )
 [node name="YouWin" type="Sprite" parent="Sprites"]
 visible = false
 position = Vector2( -530, -600 )
-texture = ExtResource( 13 )
+texture = ExtResource( 14 )
 
 [node name="Enemy" type="Sprite" parent="Sprites"]
-position = Vector2( 710, 20 )
+position = Vector2( 650, -30 )
 scale = Vector2( 0.975, 1.025 )
-texture = ExtResource( 14 )
+texture = ExtResource( 15 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Enemy"]
 autoplay = "EnemyAnimation"
@@ -159,7 +183,7 @@ anims/Sprites = ExtResource( 10 )
 editor/display_folded = true
 visible = false
 position = Vector2( -590, 20 )
-texture = ExtResource( 15 )
+texture = ExtResource( 16 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/PlayerTemp"]
 autoplay = "Player"
@@ -168,10 +192,10 @@ anims/Player = SubResource( 3 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites"]
 anims/YouWin = ExtResource( 11 )
 
-[node name="Player" parent="Sprites" instance=ExtResource( 16 )]
+[node name="Player" parent="Sprites" instance=ExtResource( 17 )]
 position = Vector2( -610, -40 )
 
-[node name="EndScreen" parent="." instance=ExtResource( 17 )]
+[node name="EndScreen" parent="." instance=ExtResource( 18 )]
 visible = false
 z_index = 3
 
@@ -187,25 +211,30 @@ margin_bottom = -688.0
 rect_scale = Vector2( 1.2, 1.2 )
 
 [node name="EnemyLife" type="HBoxContainer" parent="UI"]
-margin_left = -50.0
-margin_top = -860.0
-margin_right = 1242.0
-margin_bottom = -718.0
+margin_left = 210.0
+margin_top = -830.0
+margin_right = 1502.0
+margin_bottom = -688.0
 rect_scale = Vector2( 1.2, 1.2 )
+rect_pivot_offset = Vector2( 1288.92, 0 )
 alignment = 2
 
-[node name="Bubble" type="Sprite" parent="."]
+[node name="RefereeBubble" parent="." instance=ExtResource( 19 )]
 visible = false
-position = Vector2( 570, -580 )
-scale = Vector2( 0.713542, 0.6812 )
-texture = ExtResource( 18 )
-script = ExtResource( 19 )
+position = Vector2( 720, -510 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Bubble"]
-margin_left = -378.0
-margin_top = -103.0
-margin_right = 378.0
-margin_bottom = 103.0
-custom_fonts/normal_font = SubResource( 4 )
-bbcode_enabled = true
-bbcode_text = "[center][/center]"
+[node name="JAN" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( -1050, -380 )
+
+[node name="KEN" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 1000, 230 )
+
+[node name="GO" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( -9.99988, -140 )
+
+[node name="HirotoBubble" parent="." instance=ExtResource( 19 )]
+visible = false
+position = Vector2( -30, -540 )
