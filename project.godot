@@ -15,7 +15,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="JannkennKin"
+config/name="JannkennKing"
+run/main_scene="res://fightingPit/fightingPit.tscn"
 config/icon="res://icon.png"
 
 [autoload]

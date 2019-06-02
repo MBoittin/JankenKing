@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://fightingPit/fightingPit.gd" type="Script" id=1]
 [ext_resource path="res://Fight/Fight.tscn" type="PackedScene" id=2]
@@ -14,15 +14,17 @@
 [ext_resource path="res://fightingPit/presenter_go.png" type="Texture" id=12]
 [ext_resource path="res://fightingPit/crowd.png" type="Texture" id=13]
 [ext_resource path="res://fightingPit/Hola.png" type="Texture" id=14]
-[ext_resource path="res://fightingPit/You win.png" type="Texture" id=15]
-[ext_resource path="res://fightingPit/hiroto.png" type="Texture" id=16]
-[ext_resource path="res://fightingPit/player.png" type="Texture" id=17]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=18]
-[ext_resource path="res://EndScreen/EndScreen.tscn" type="PackedScene" id=19]
-[ext_resource path="res://fightingPit/Bubble.tscn" type="PackedScene" id=20]
-[ext_resource path="res://fightingPit/menu-bg.jpg" type="Texture" id=21]
-[ext_resource path="res://fightingPit/play-button.png" type="Texture" id=22]
-[ext_resource path="res://bgm/prelude-and-action-by-kevin-macleod.ogg" type="AudioStream" id=23]
+[ext_resource path="res://sfx/stage/crowd_oooh.wav" type="AudioStream" id=15]
+[ext_resource path="res://fightingPit/You win.png" type="Texture" id=16]
+[ext_resource path="res://fightingPit/hiroto.png" type="Texture" id=17]
+[ext_resource path="res://fightingPit/player.png" type="Texture" id=18]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=19]
+[ext_resource path="res://EndScreen/EndScreen.tscn" type="PackedScene" id=20]
+[ext_resource path="res://fightingPit/Bubble.tscn" type="PackedScene" id=21]
+[ext_resource path="res://fightingPit/menu-bg.jpg" type="Texture" id=22]
+[ext_resource path="res://fightingPit/play-button.png" type="Texture" id=23]
+[ext_resource path="res://bgm/prelude-and-action-by-kevin-macleod.ogg" type="AudioStream" id=24]
+[ext_resource path="res://sfx/stage/janken king.wav" type="AudioStream" id=25]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Hints"
@@ -139,6 +141,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=6]
 resource_name = "Hooray"
 length = 0.9
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
@@ -162,6 +165,42 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 1.05, 1 ), Vector2( 1.1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AudioStreamPlayer:pitch_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.4, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.05, 1.25, 1.15 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AudioStreamPlayer:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -277,15 +316,19 @@ texture = ExtResource( 14 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Crowd/Sprite"]
 anims/Hooray = SubResource( 6 )
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sprites/Crowd/Sprite"]
+stream = ExtResource( 15 )
+pitch_scale = 1.09
+
 [node name="YouWin" type="Sprite" parent="Sprites"]
 visible = false
 position = Vector2( -530, -600 )
-texture = ExtResource( 15 )
+texture = ExtResource( 16 )
 
 [node name="Enemy" type="Sprite" parent="Sprites"]
 position = Vector2( 650, -30 )
 scale = Vector2( 0.975, 1.025 )
-texture = ExtResource( 16 )
+texture = ExtResource( 17 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Enemy"]
 autoplay = "EnemyAnimation"
@@ -296,7 +339,7 @@ anims/Sprites = ExtResource( 10 )
 editor/display_folded = true
 visible = false
 position = Vector2( -590, 20 )
-texture = ExtResource( 17 )
+texture = ExtResource( 18 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/PlayerTemp"]
 autoplay = "Player"
@@ -305,10 +348,10 @@ anims/Player = SubResource( 7 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites"]
 anims/YouWin = ExtResource( 11 )
 
-[node name="Player" parent="Sprites" instance=ExtResource( 18 )]
+[node name="Player" parent="Sprites" instance=ExtResource( 19 )]
 position = Vector2( -610, -40 )
 
-[node name="EndScreen" parent="." instance=ExtResource( 19 )]
+[node name="EndScreen" parent="." instance=ExtResource( 20 )]
 visible = false
 z_index = 3
 
@@ -332,23 +375,23 @@ rect_scale = Vector2( 1.2, 1.2 )
 rect_pivot_offset = Vector2( 1288.92, 0 )
 alignment = 2
 
-[node name="RefereeBubble" parent="." instance=ExtResource( 20 )]
+[node name="RefereeBubble" parent="." instance=ExtResource( 21 )]
 visible = false
 position = Vector2( 720, -510 )
 
-[node name="JAN" parent="." instance=ExtResource( 20 )]
+[node name="JAN" parent="." instance=ExtResource( 21 )]
 visible = false
 position = Vector2( -1050, -380 )
 
-[node name="KEN" parent="." instance=ExtResource( 20 )]
+[node name="KEN" parent="." instance=ExtResource( 21 )]
 visible = false
 position = Vector2( 1000, 230 )
 
-[node name="GO" parent="." instance=ExtResource( 20 )]
+[node name="GO" parent="." instance=ExtResource( 21 )]
 visible = false
 position = Vector2( -9.99988, -140 )
 
-[node name="HirotoBubble" parent="." instance=ExtResource( 20 )]
+[node name="HirotoBubble" parent="." instance=ExtResource( 21 )]
 visible = false
 position = Vector2( -30, -540 )
 
@@ -356,16 +399,19 @@ position = Vector2( -30, -540 )
 z_index = 3
 
 [node name="Sprite" type="Sprite" parent="MenuScreen"]
-texture = ExtResource( 21 )
+texture = ExtResource( 22 )
 
 [node name="Sprite2" type="Sprite" parent="MenuScreen"]
 position = Vector2( 60, 40 )
-texture = ExtResource( 22 )
+texture = ExtResource( 23 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MenuScreen/Sprite2"]
 autoplay = "Idle"
 anims/Idle = SubResource( 8 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 23 )
+stream = ExtResource( 24 )
 autoplay = true
+
+[node name="JanKenKing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 25 )

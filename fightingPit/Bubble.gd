@@ -12,6 +12,7 @@ func _ready():
 func speak():
 	$Idle.stop()
 	$Append.play("Append")
+	$AudioStreamPlayer.pitch_scale = rand_range(0.65, 1.05)
 	visible = true
 	yield ($Append, "animation_finished")
 	$Idle.play("Speaking")

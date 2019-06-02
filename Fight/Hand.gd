@@ -23,7 +23,6 @@ func changeSprite(newSprite):
 	$Sprite.texture = newSprite
 
 func setPlayerHand():
-	print("thing")
 	animation = "HandAnimation"
 
 func sendEndTurn():
@@ -31,6 +30,7 @@ func sendEndTurn():
 		emit_signal("animation_finished")
 
 func startTurn():
+	selectedSprite = Global.rock
 	$Sprite.texture = Global.rock
 	iterator = 0
 	$Sprite.scale.x = 1
