@@ -21,6 +21,13 @@ var rock = preload("res://Fight/Rock.png")
 
 var flippedLife = preload("res://fightingPit/HPFliped.png")
 
+var lukasWin = preload("res://EndScreen/Lukas_victory.png")
+var lukasLoose = preload("res://EndScreen/Lukas_defeat.png")
+var HirotoWin = preload("res://EndScreen/Hiroto_victory.png")
+var HirotoLoose = preload("res://EndScreen/Hiroto_defeat.png")
+
+var endGame = false
+
 var symbolsArray = [rock, paper, scissors]
 
 func getWinner(symbol1, symbol2):

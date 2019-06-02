@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://fightingPit/fightingPit.gd" type="Script" id=1]
 [ext_resource path="res://Fight/Fight.tscn" type="PackedScene" id=2]
@@ -7,18 +7,21 @@
 [ext_resource path="res://fightingPit/background.png" type="Texture" id=5]
 [ext_resource path="res://fightingPit/Platform.png" type="Texture" id=6]
 [ext_resource path="res://fightingPit/stand.png" type="Texture" id=7]
-[ext_resource path="res://fightingPit/Presenter.png" type="Texture" id=8]
+[ext_resource path="res://fightingPit/presenteur_pointing.png" type="Texture" id=8]
 [ext_resource path="res://fightingPit/EnemyAnimation.tres" type="Animation" id=9]
 [ext_resource path="res://fightingPit/Sprites.tres" type="Animation" id=10]
 [ext_resource path="res://fightingPit/YouWin.tres" type="Animation" id=11]
 [ext_resource path="res://fightingPit/presenter_go.png" type="Texture" id=12]
 [ext_resource path="res://fightingPit/crowd.png" type="Texture" id=13]
-[ext_resource path="res://fightingPit/You win.png" type="Texture" id=14]
-[ext_resource path="res://fightingPit/hiroto.png" type="Texture" id=15]
-[ext_resource path="res://fightingPit/player.png" type="Texture" id=16]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=17]
-[ext_resource path="res://EndScreen/EndScreen.tscn" type="PackedScene" id=18]
-[ext_resource path="res://fightingPit/Bubble.tscn" type="PackedScene" id=19]
+[ext_resource path="res://fightingPit/Hola.png" type="Texture" id=14]
+[ext_resource path="res://fightingPit/You win.png" type="Texture" id=15]
+[ext_resource path="res://fightingPit/hiroto.png" type="Texture" id=16]
+[ext_resource path="res://fightingPit/player.png" type="Texture" id=17]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=18]
+[ext_resource path="res://EndScreen/EndScreen.tscn" type="PackedScene" id=19]
+[ext_resource path="res://fightingPit/Bubble.tscn" type="PackedScene" id=20]
+[ext_resource path="res://fightingPit/menu-bg.jpg" type="Texture" id=21]
+[ext_resource path="res://fightingPit/play-button.png" type="Texture" id=22]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Hints"
@@ -35,7 +38,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "JANKENGO"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:texture")
@@ -62,8 +65,61 @@ tracks/1/keys = {
 "values": [ Vector2( 3.29303, -420 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "crowdAnimation"
+[sub_resource type="Animation" id=3]
+resource_name = "EnemyWin"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 150, -240 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "win"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -120, -240 ) ]
+}
+
+[sub_resource type="Animation" id=5]
 length = 4.0
 loop = true
 tracks/0/type = "value"
@@ -73,13 +129,41 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5, 2.4, 4 ),
-"transitions": PoolRealArray( 1, 1, 0.217638, 1 ),
+"times": PoolRealArray( 0, 1.5, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1, 1.05 ), Vector2( 1, 1.08 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1.05 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=6]
+resource_name = "Hooray"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.5, 0.7, 0.9, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 540 ), Vector2( 0, -10 ), Vector2( 0, 60 ), Vector2( 0, 30 ), Vector2( 0, 200 ), Vector2( 0, 540 ), Vector2( 0, -10 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.05, 1 ), Vector2( 1.1, 1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -105,6 +189,22 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( -590, 20 ), Vector2( -590, 10 ), Vector2( -590, 20 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
 }
 
 [node name="FightingPit" type="Node2D"]
@@ -143,8 +243,9 @@ position = Vector2( 9, 116 )
 texture = ExtResource( 7 )
 
 [node name="Presenter" type="Sprite" parent="Sprites"]
-position = Vector2( 10, -240 )
+position = Vector2( -120, -240 )
 texture = ExtResource( 8 )
+offset = Vector2( 4.29084, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Presenter"]
 autoplay = "PresenterIdle"
@@ -153,26 +254,37 @@ anims/PresenterIdle = ExtResource( 10 )
 "anims/You Win" = ExtResource( 11 )
 
 [node name="JANKENGO" type="AnimationPlayer" parent="Sprites/Presenter"]
-anims/JANKENGO = SubResource( 4 )
+anims/JANKENGO = SubResource( 2 )
+
+[node name="Winning" type="AnimationPlayer" parent="Sprites/Presenter"]
+anims/EnemyWin = SubResource( 3 )
+anims/win = SubResource( 4 )
 
 [node name="Crowd" type="Sprite" parent="Sprites"]
 position = Vector2( 0, 490 )
-scale = Vector2( 1, 1.08 )
 texture = ExtResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Crowd"]
 autoplay = "crowdAnimation"
-anims/crowdAnimation = SubResource( 2 )
+anims/crowdAnimation = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="Sprites/Crowd"]
+position = Vector2( 0, 540 )
+z_index = 2
+texture = ExtResource( 14 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Crowd/Sprite"]
+anims/Hooray = SubResource( 6 )
 
 [node name="YouWin" type="Sprite" parent="Sprites"]
 visible = false
 position = Vector2( -530, -600 )
-texture = ExtResource( 14 )
+texture = ExtResource( 15 )
 
 [node name="Enemy" type="Sprite" parent="Sprites"]
 position = Vector2( 650, -30 )
 scale = Vector2( 0.975, 1.025 )
-texture = ExtResource( 15 )
+texture = ExtResource( 16 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Enemy"]
 autoplay = "EnemyAnimation"
@@ -183,19 +295,19 @@ anims/Sprites = ExtResource( 10 )
 editor/display_folded = true
 visible = false
 position = Vector2( -590, 20 )
-texture = ExtResource( 16 )
+texture = ExtResource( 17 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/PlayerTemp"]
 autoplay = "Player"
-anims/Player = SubResource( 3 )
+anims/Player = SubResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites"]
 anims/YouWin = ExtResource( 11 )
 
-[node name="Player" parent="Sprites" instance=ExtResource( 17 )]
+[node name="Player" parent="Sprites" instance=ExtResource( 18 )]
 position = Vector2( -610, -40 )
 
-[node name="EndScreen" parent="." instance=ExtResource( 18 )]
+[node name="EndScreen" parent="." instance=ExtResource( 19 )]
 visible = false
 z_index = 3
 
@@ -219,22 +331,36 @@ rect_scale = Vector2( 1.2, 1.2 )
 rect_pivot_offset = Vector2( 1288.92, 0 )
 alignment = 2
 
-[node name="RefereeBubble" parent="." instance=ExtResource( 19 )]
+[node name="RefereeBubble" parent="." instance=ExtResource( 20 )]
 visible = false
 position = Vector2( 720, -510 )
 
-[node name="JAN" parent="." instance=ExtResource( 19 )]
+[node name="JAN" parent="." instance=ExtResource( 20 )]
 visible = false
 position = Vector2( -1050, -380 )
 
-[node name="KEN" parent="." instance=ExtResource( 19 )]
+[node name="KEN" parent="." instance=ExtResource( 20 )]
 visible = false
 position = Vector2( 1000, 230 )
 
-[node name="GO" parent="." instance=ExtResource( 19 )]
+[node name="GO" parent="." instance=ExtResource( 20 )]
 visible = false
 position = Vector2( -9.99988, -140 )
 
-[node name="HirotoBubble" parent="." instance=ExtResource( 19 )]
+[node name="HirotoBubble" parent="." instance=ExtResource( 20 )]
 visible = false
 position = Vector2( -30, -540 )
+
+[node name="MenuScreen" type="Node2D" parent="."]
+z_index = 3
+
+[node name="Sprite" type="Sprite" parent="MenuScreen"]
+texture = ExtResource( 21 )
+
+[node name="Sprite2" type="Sprite" parent="MenuScreen"]
+position = Vector2( 60, 40 )
+texture = ExtResource( 22 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuScreen/Sprite2"]
+autoplay = "Idle"
+anims/Idle = SubResource( 8 )

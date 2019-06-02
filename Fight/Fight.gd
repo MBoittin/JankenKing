@@ -23,6 +23,7 @@ func startGame(newMoves):
 	$ResetSymbols.play("ResetSymbols")
 	moves = newMoves
 	turnCount = 0
+	victoryCount = 0
 	startNextTurn = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

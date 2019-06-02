@@ -8,8 +8,19 @@ extends Node2D
 func _ready():
 	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_just_released("ui_accept"):
-		$AnimationPlayer.play("LightningAnimation")
+func setEndScreen(sprite1, sprite2, win):
+	$doge2.texture = sprite1
+	$doge.texture = sprite2
+	if win:
+		$backGround/Win.play("Win")
+		$backGround2/Win.play("Lose")
+	else:
+		$backGround/Loose.play("Lose")
+		$backGround2/Loose.play("Win")
+		$YouWin.visible = false
+	Global.endGame = true
 	pass
+	
+func _process(delta):
+	if Input.is_action_just_released("ui_accept") && Global.endGame:
+		get_tree().reload_current_scene()

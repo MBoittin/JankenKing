@@ -9,6 +9,7 @@ var playerLife = 0
 var enemyLife = 0
 var LifeIcon = preload("res://Life.tscn")
 
+signal endHinting
 signal valid
 
 enum States {
@@ -18,6 +19,7 @@ enum States {
 
 var state = States.pause
 var activeBubble = null
+var enemyBubble = null
 
 func addLifeToPlayer():
 	var index = $UI/PlayerLife.get_child_count()
@@ -55,6 +57,12 @@ func removePlayerLife():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	activeBubble = $RefereeBubble
+	state = States.speaking
+	yield(self, "valid")
+	$MenuScreen.queue_free()
+	self.remove_child($MenuScreen)
+	enemyBubble = $HirotoBubble
 	yield(get_tree().create_timer(1), "timeout")
 	addLifeToPlayer()
 	addLifeToEnemy()
@@ -72,7 +80,6 @@ func _ready():
 	pass # Replace with function body.
 
 func launchTutorial():
-
 	activeBubble = $RefereeBubble
 	activeBubble.appendText("   HELLO EVERYONE !\n    AND WELCOME TO\n", "#f2f2f2")
 	activeBubble.appendText("    JANKEN KIIING !!! \n", "#f4cd2a")
@@ -112,17 +119,17 @@ func initTurn(setMoves):
 	$Sprites/Presenter/AnimationPlayer.stop()
 	$Sprites/Presenter/JANKENGO.play("JANKENGO")
 	activeBubble = $JAN
-	activeBubble.appendText("[b]JAN[/b]", "#f2f2f2")
+	activeBubble.appendText("[center][b]JAN[/b][/center]", "#f2f2f2")
 	activeBubble.speak()
 	yield(get_tree().create_timer(0.6), "timeout")
 	activeBubble.stopSpeaking()
 	activeBubble = $KEN
-	activeBubble.appendText("[b]KEN[/b]", "#f2f2f2")
+	activeBubble.appendText("[center][b]KEN[/b][/center]", "#f2f2f2")
 	activeBubble.speak()
 	yield(get_tree().create_timer(0.6), "timeout")
 	activeBubble.stopSpeaking()
 	activeBubble = $GO
-	activeBubble.appendText("[b]GO[/b]", "#f2f2f2")
+	activeBubble.appendText("[center][b]GO[/b][/center]", "#f2f2f2")
 	activeBubble.speak()
 	yield(get_tree().create_timer(0.6), "timeout")
 	activeBubble.stopSpeaking()
@@ -137,17 +144,45 @@ func resolveGame(victoryCount):
 		removeEnemyLife()
 		yield(get_tree().create_timer(0.8), "timeout")
 		if enemyLife == 0:
+			$EndScreen.setEndScreen(Global.lukasWin, Global.HirotoLoose, true)
 			$EndScreen.visible = true
 		yield(get_tree().create_timer(0.4), "timeout")
-
-		$Sprites/YouWin.visible = true
-		$Sprites/AnimationPlayer.play("YouWin")
+		#$Sprites/YouWin.visible = true
+		#$Sprites/AnimationPlayer.play("YouWin")
 	elif (victoryCount < 0):
 		removePlayerLife()
 		yield(get_tree().create_timer(0.8), "timeout")
 		if playerLife == 0:
+			$EndScreen.setEndScreen(Global.lukasLoose, Global.HirotoWin, false)
 			$EndScreen.visible = true
-	yield(get_tree().create_timer(0.7), "timeout")
+	if victoryCount != 0:
+		$Sprites/Crowd/Sprite/AnimationPlayer.play("Hooray")
+		$Sprites/Presenter/AnimationPlayer.stop()
+		if (victoryCount < 0):
+			$Sprites/Presenter.flip_h = true
+			$Sprites/Presenter/Winning.play("EnemyWin")	
+		else:
+			$Sprites/Presenter/Winning.play("win")
+		
+		
+		yield($Sprites/Crowd/Sprite/AnimationPlayer, "animation_finished")
+		
+		$Sprites/Presenter/Winning.stop()
+		$Sprites/Presenter/AnimationPlayer.play("PresenterIdle")
+		$Sprites/Presenter.flip_h = false
+		
+	victoryCount = 0
+	yield(get_tree().create_timer(1), "timeout")
+	if !Global.endGame:
+		enemyAI()
+
+func enemyAI():
+	for i in range(3):
+		moves[i] = randi() % 3
+	startHinting(moves)
+	yield(self, "endHinting")
+	yield(get_tree().create_timer(0.5), "timeout")
+	initTurn(moves)
 
 func startTurn():
 	$Sprites.visible = false
@@ -156,18 +191,51 @@ func startTurn():
 	var victoryCount = yield($Fight, "game_end")
 	resolveGame(victoryCount)
 
-func startHinting():
-	$Ennemy.giveHint(moves[0])
-	yield($Ennemy, "hint_finished")
-	$Ennemy.giveHint(moves[1])
-	yield($Ennemy, "hint_finished")
-	$Ennemy.giveHint(moves[2])
-	yield($Ennemy, "hint_finished")
-	$Sprites.visible = false
-	$Fight.visible = true
-	$Fight.startGame(moves)
-	var victoryCount = yield($Fight, "game_end")
-	resolveGame(victoryCount)
+func throwHint(move):
+	if move == Global.Symbols.rock:
+		activeBubble = $HirotoBubble
+		activeBubble.appendText("\n \tI AM SOLID AS A\n", "#f2f2f2")
+		activeBubble.appendText("\t\t\tROCK !", "#782020")
+		activeBubble.speak()
+		state = States.speaking
+	elif move == Global.Symbols.scissors:
+		activeBubble = $HirotoBubble
+		activeBubble.appendText("\n \t\tI WILL", "#f2f2f2")
+		activeBubble.appendText(" SLICE ", "#0000cc")
+		activeBubble.appendText("\tYOUR HEAD OFF !", "#f2f2f2")
+		activeBubble.speak()
+		state = States.speaking
+	else:
+		activeBubble = $HirotoBubble
+		activeBubble.appendText("\n \tTHIS WILL BE YOUR\n", "#f2f2f2")
+		activeBubble.appendText("\t\t\t\tFALL ", "#329932")
+		activeBubble.speak()
+		state = States.speaking
+	pass
+
+func startHinting(selectedMoves):
+	#$Ennemy.giveHint(moves[0])
+	throwHint(moves[0])
+	yield(get_tree().create_timer(1.5), "timeout")
+	activeBubble.stopSpeaking()
+	state = States.pause
+	yield(activeBubble, "animation_finished")
+	yield(get_tree().create_timer(0.7), "timeout")
+	if (moves[0] != moves[1]):
+		throwHint(moves[1])
+		yield(get_tree().create_timer(1.5), "timeout")
+		activeBubble.stopSpeaking()
+		state = States.pause
+		yield(activeBubble, "animation_finished")
+		yield(get_tree().create_timer(0.7), "timeout")
+	if (moves[2] != moves[1] && moves[2] != moves[0]):
+		throwHint(moves[2])
+		yield(get_tree().create_timer(1.5), "timeout")
+		activeBubble.stopSpeaking()
+		state = States.pause
+		yield(activeBubble, "animation_finished")
+		yield(get_tree().create_timer(0.7), "timeout")
+	emit_signal("endHinting")
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
