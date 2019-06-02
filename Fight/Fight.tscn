@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Fight/Fight.gd" type="Script" id=1]
 [ext_resource path="res://Fight/PlayerHand.tscn" type="PackedScene" id=2]
@@ -9,7 +9,7 @@
 [ext_resource path="res://fightingPit/leaf_button.png" type="Texture" id=7]
 [ext_resource path="res://Fight/fightBackGround.png" type="Texture" id=8]
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=1]
 resource_name = "Selected"
 loop = true
 tracks/0/type = "value"
@@ -22,11 +22,74 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.4, 0.8, 0.989461 ),
 "transitions": PoolRealArray( 1, 1.23114, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 0.95, 0.95 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 0.95, 0.95 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "Idle"
+[sub_resource type="Animation" id=7]
+resource_name = "Selection"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Hide"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1.1487 ),
+"update": 0,
+"values": [ Vector2( 470, 680.87 ), Vector2( 470, 1130.87 ) ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"points": PoolRealArray( 470, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath(".:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 680.87, -0.0117149, 9.18181, 0.209905, -318.805, 1130, -0.37573, -444.388, 0.0179069, 9.1683 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 13.0, 24.0, 40.0 ]
+}
+
+[sub_resource type="Animation" id=2]
 length = 2.3
 loop = true
 tracks/0/type = "value"
@@ -42,7 +105,7 @@ tracks/0/keys = {
 "values": [ Vector2( -469.754, 671.498 ), Vector2( -469.754, 651.498 ), Vector2( -469.754, 671.498 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "Selected"
 loop = true
 tracks/0/type = "value"
@@ -55,11 +118,74 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.4, 0.7, 1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Idle"
+[sub_resource type="Animation" id=8]
+resource_name = "Selection"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Hide"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1.1487 ),
+"update": 0,
+"values": [ Vector2( 470, 680.87 ), Vector2( 470, 1130.87 ) ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"points": PoolRealArray( 470, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath(".:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 680.87, -0.0117149, 9.18181, 0.209905, -318.805, 1130, -0.37573, -444.388, 0.0179069, 9.1683 ),
+"times": PoolRealArray( 0, 0.7 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -13.0, -24.0, -40.0 ]
+}
+
+[sub_resource type="Animation" id=4]
 length = 1.8
 loop = true
 tracks/0/type = "value"
@@ -72,10 +198,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.9, 1.8 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -2.64081, 364.958 ), Vector2( -2.641, 344.958 ), Vector2( -2.64081, 364.958 ) ]
+"values": [ Vector2( -2.641, 365 ), Vector2( -2.641, 344.958 ), Vector2( -2.64081, 364.958 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "Selected"
 length = 1.1
 loop = true
@@ -89,10 +215,75 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.8, 1.1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 0.93, 0.93 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 0.93, 0.93 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=9]
+resource_name = "Selection"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "Hide"
+length = 0.75
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1.1487 ),
+"update": 0,
+"values": [ Vector2( 470, 680.87 ), Vector2( 470, 1130.87 ) ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"points": PoolRealArray( 470, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath(".:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 365, -0.0117149, 9.18181, 0.209905, -318.805, 1130, -0.37573, -444.388, 0.0179069, 9.1683 ),
+"times": PoolRealArray( 0, 0.75 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 13.0, 24.0, 80.0 ]
+}
+
+[sub_resource type="Animation" id=6]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -106,6 +297,118 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( -4800, 0 ), Vector2( 4800, 0 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "ResetSymbols"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Ciseaux:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1.07177 ),
+"update": 0,
+"values": [ Vector2( 1e-005, 1e-005 ), Vector2( 1e-005, 1e-005 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Ciseaux:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 470, 680.87 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Pierre:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Pierre:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -468, 680.87 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Papier:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Papier:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -2.64081, 365 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Ciseaux:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Pierre:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Papier:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
 }
 
 [node name="Fight" type="Node2D"]
@@ -122,7 +425,6 @@ visible = false
 
 [node name="Ciseaux" type="Sprite" parent="."]
 position = Vector2( 470, 680.87 )
-scale = Vector2( 1.09407, 1.09407 )
 texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Ciseaux"]
@@ -130,48 +432,68 @@ autoplay = "Idle"
 anims/Idle = ExtResource( 5 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Ciseaux"]
-anims/Selected = SubResource( 4 )
+anims/Selected = SubResource( 1 )
+
+[node name="Selection" type="AnimationPlayer" parent="Ciseaux"]
+anims/Selection = SubResource( 7 )
+
+[node name="Hide" type="AnimationPlayer" parent="Ciseaux"]
+anims/Hide = SubResource( 10 )
 
 [node name="Pierre" type="Sprite" parent="."]
-position = Vector2( -468, 671.498 )
-scale = Vector2( 0.927859, 0.927859 )
+position = Vector2( -468, 680.87 )
 texture = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Pierre"]
 autoplay = "Idle"
-anims/Idle = SubResource( 1 )
+anims/Idle = SubResource( 2 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Pierre"]
-anims/Selected = SubResource( 5 )
+anims/Selected = SubResource( 3 )
+
+[node name="Selection" type="AnimationPlayer" parent="Pierre"]
+anims/Selection = SubResource( 8 )
+
+[node name="Hide" type="AnimationPlayer" parent="Pierre"]
+anims/Hide = SubResource( 11 )
 
 [node name="Papier" type="Sprite" parent="."]
-position = Vector2( 0, 467.958 )
-scale = Vector2( 1.08614, 1.08614 )
+position = Vector2( -2.64081, 365 )
 texture = ExtResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Papier"]
 autoplay = "Idle"
-anims/Idle = SubResource( 2 )
+anims/Idle = SubResource( 4 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="Papier"]
-anims/Selected = SubResource( 6 )
+anims/Selected = SubResource( 5 )
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Selection" type="AnimationPlayer" parent="Papier"]
+anims/Selection = SubResource( 9 )
+
+[node name="Hide" type="AnimationPlayer" parent="Papier"]
+anims/Hide = SubResource( 12 )
+
+[node name="Background" type="Node2D" parent="."]
 position = Vector2( -4287.82, 0 )
+z_index = -2
 
-[node name="Sprite" type="Sprite" parent="Node2D"]
+[node name="Sprite" type="Sprite" parent="Background"]
 position = Vector2( 0, -6.73102 )
 z_index = -1
 texture = ExtResource( 8 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 12800, 1800 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
 autoplay = "BackGround"
-anims/BackGround = SubResource( 3 )
+anims/BackGround = SubResource( 6 )
 
 [node name="Camera2D2" type="Camera2D" parent="."]
 current = true
+
+[node name="ResetSymbols" type="AnimationPlayer" parent="."]
+anims/ResetSymbols = SubResource( 13 )
 [connection signal="player_turn_end" from="PlayerHand" to="." method="_on_PlayerHand_player_turn_end"]
 [connection signal="selected_symbol" from="PlayerHand" to="." method="_on_PlayerHand_selected_symbol"]
 [connection signal="animation_finished" from="Hand" to="." method="_on_Hand_animation_finished"]

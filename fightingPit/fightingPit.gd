@@ -5,11 +5,36 @@ extends Node2D
 # var b = "text"
 
 var moves = [0, 0, 0]
-var playerLife = 2
-var enemyLife = 2
+var playerLife = 0
+var enemyLife = 0
+var LifeIcon = preload("res://Life.tscn")
 
+
+func addLifeToPlayer():
+	var index = $UI/PlayerLife.get_child_count()
+	
+	$UI/PlayerLife.add_child(LifeIcon.instance())
+	$UI/PlayerLife.get_child(index).create()
+	playerLife += 1
+	pass
+
+func addLifeToEnemy():
+	var index = $UI/EnemyLife.get_child_count()
+	
+	$UI/EnemyLife.add_child(LifeIcon.instance())
+	$UI/EnemyLife.get_child(index).setFlip()
+	$UI/EnemyLife.get_child(0).create()
+	enemyLife += 1
+	pass
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	yield(get_tree().create_timer(1), "timeout")
+	addLifeToPlayer()
+	addLifeToEnemy()
+	yield(get_tree().create_timer(1), "timeout")
+	addLifeToPlayer()
+	addLifeToEnemy()
+	
 	randomize()
 	#$Bubble.visible = true
 	#$Bubble.appendText("I'm the ", "#ffffff")
@@ -23,8 +48,8 @@ func resolveGame(victoryCount):
 		enemyLife -= 1
 		if enemyLife == 0:
 			$EndScreen.visible = true
-			
 		yield(get_tree().create_timer(0.4), "timeout")
+		
 		$Sprites/YouWin.visible = true
 		$Sprites/AnimationPlayer.play("YouWin")
 	elif (victoryCount < 0):

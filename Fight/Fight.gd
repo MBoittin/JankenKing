@@ -20,6 +20,7 @@ func _ready():
 	pass # Replace with function body.
 
 func startGame(newMoves):
+	$ResetSymbols.play("ResetSymbols")
 	moves = newMoves
 	turnCount = 0
 	startNextTurn = true
@@ -35,6 +36,7 @@ func _process(delta):
 		if turnCount == 3:
 			endGame()
 		else:
+			print("StartNext")
 			$PlayerHand.startTurn()
 			$Hand.startTurn()
 	pass
@@ -50,10 +52,19 @@ func endGame():
 
 func endTurn():
 	var winState = Global.getWinner(playerSymbol, symbol)
+	print ("Winner is", winState)
 	if winState == Global.VictoryState.player1Win:
+		print("Number 1")
 		victoryCount += 1
+		yield($Hand/AnimationPlayer, "animation_finished")
+		$Hand/AnimationPlayer.play("Destruction")
+		yield($Hand/AnimationPlayer, "animation_finished")
 	elif winState == Global.VictoryState.player2Win:
 		victoryCount -= 1
+		yield($PlayerHand/Hand/AnimationPlayer, "animation_finished")
+		$PlayerHand/Hand/AnimationPlayer.play("Destruction")
+		yield($PlayerHand/Hand/AnimationPlayer, "animation_finished")
+	$ResetSymbols.play("ResetSymbols")
 	yield(get_tree().create_timer(1), "timeout")
 	startNextTurn = true
 
@@ -66,8 +77,31 @@ func _on_Hand_animation_finished():
 
 
 func _on_PlayerHand_player_turn_end(selectedAction):
-	print ("test")
 	endOfPlayerTurn = true
+	if playerSymbol == Global.Symbols.rock:
+		$Ciseaux/Hide.play("Hide")
+		$Ciseaux/AnimationPlayer.stop()
+		$Papier/Hide.play("Hide")
+		$Papier/AnimationPlayer.stop()
+		$Pierre/Selection.play("Selection")
+		yield($Pierre/Selection, "animation_finished")
+		$Pierre/AnimationPlayer2.play("Selected")
+	if playerSymbol == Global.Symbols.scissors:
+		$Pierre/AnimationPlayer.stop()
+		$Papier/AnimationPlayer.stop()
+		$Papier/Hide.play("Hide")
+		$Pierre/Hide.play("Hide")
+		$Ciseaux/Selection.play("Selection")
+		yield($Ciseaux/Selection, "animation_finished")
+		$Ciseaux/AnimationPlayer2.play("Selected")
+	if playerSymbol == Global.Symbols.paper:
+		$Ciseaux/AnimationPlayer.stop()
+		$Pierre/AnimationPlayer.stop()
+		$Ciseaux/Hide.play("Hide")
+		$Pierre/Hide.play("Hide")
+		$Papier/Selection.play("Selection")
+		yield($Papier/Selection, "animation_finished")
+		$Papier/AnimationPlayer2.play("Selected")
 	pass # Replace with function body.
 
 
@@ -79,9 +113,15 @@ func _on_PlayerHand_selected_symbol(selectedSymbol):
 	$Papier/AnimationPlayer2.stop()
 
 	if selectedSymbol == Global.Symbols.rock:
+		$Pierre/Selection.play("Selection")
+		yield($Pierre/Selection, "animation_finished")
 		$Pierre/AnimationPlayer2.play("Selected")
 	if selectedSymbol == Global.Symbols.scissors:
+		$Ciseaux/Selection.play("Selection")
+		yield($Ciseaux/Selection, "animation_finished")
 		$Ciseaux/AnimationPlayer2.play("Selected")
 	if selectedSymbol == Global.Symbols.paper:
+		$Papier/Selection.play("Selection")
+		yield($Papier/Selection, "animation_finished")
 		$Papier/AnimationPlayer2.play("Selected")
 	pass # Replace with function body.

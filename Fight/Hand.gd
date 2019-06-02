@@ -6,6 +6,7 @@ signal animation_finished
 # var b = "text"
 var selectedSprite = null
 var animation = "HandAnimationEnemy"
+var iterator = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,10 +26,17 @@ func setPlayerHand():
 	print("thing")
 	animation = "HandAnimation"
 
+func sendEndTurn():
+	if iterator == 3:
+		emit_signal("animation_finished")
+
 func startTurn():
-	for i in range(3):
+	iterator = 0
+	$Sprite.scale.x = 1
+	$Sprite.scale.y = 1
+	while iterator != 3:
+		iterator += 1
 		$AnimationPlayer.play(animation)
 		yield($AnimationPlayer, "animation_finished")
-		if i == 1:
-			emit_signal("animation_finished")
+		
 	

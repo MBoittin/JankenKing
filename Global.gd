@@ -19,6 +19,8 @@ var scissors = preload("res://Fight/Scissors.png")
 var paper = preload("res://Fight/Paper.png")
 var rock = preload("res://Fight/Rock.png")
 
+var flippedLife = preload("res://fightingPit/HPFliped.png")
+
 var symbolsArray = [rock, paper, scissors]
 
 func getWinner(symbol1, symbol2):
